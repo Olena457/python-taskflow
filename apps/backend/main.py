@@ -1,4 +1,7 @@
+
+
 from fastapi import FastAPI, Depends, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware 
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, Field
 from typing import Optional, List
@@ -10,6 +13,14 @@ import models
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="TaskFlow API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://192.168.1.3:3000"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"], 
+)
 
 # --- PYDANTIC SCHEMAS ---
 
@@ -42,17 +53,16 @@ class TaskResponse(BaseModel):
 
 # --- API ENDPOINTS ---
 
-# Get all tasks with search, status filter, and priority sorting
 @app.get("/tasks", response_model=List[TaskResponse])
 def get_tasks(
     search: Optional[str] = None,
     status: Optional[str] = Query("all", description="all, done, or undone"),
+    category: Optional[str] = None, 
     sort_priority: Optional[str] = Query(None, description="asc or desc"),
     db: Session = Depends(get_db)
 ):
     query = db.query(models.Task)
 
-    # Search in both title and description
     if search:
         query = query.filter(
             (models.Task.title.contains(search)) | 
@@ -65,6 +75,10 @@ def get_tasks(
     elif status == "undone":
         query = query.filter(models.Task.done == False)
 
+    # Filter by category
+    if category:
+        query = query.filter(models.Task.category == category)
+
     # Sort by priority
     if sort_priority == "asc":
         query = query.order_by(models.Task.priority.asc())
@@ -73,7 +87,6 @@ def get_tasks(
 
     return query.all()
 
-# Create a new task
 @app.post("/tasks", response_model=TaskResponse)
 def create_task(task_in: TaskCreate, db: Session = Depends(get_db)):
     new_task = models.Task(
@@ -88,20 +101,7 @@ def create_task(task_in: TaskCreate, db: Session = Depends(get_db)):
     db.refresh(new_task)
     return new_task
 
-# Toggle task done status
-@app.patch("/tasks/{task_id}/toggle", response_model=TaskResponse)
-def toggle_task_status(task_id: int, db: Session = Depends(get_db)):
-    task = db.query(models.Task).filter(models.Task.id == task_id).first()
-    if not task:
-        raise HTTPException(status_code=404, detail="Task not found")
-    
-    task.done = not task.done
-    db.commit()
-    db.refresh(task)
-    return task
-
-# Update task details
-@app.put("/tasks/{task_id}", response_model=TaskResponse)
+@app.patch("/tasks/{task_id}", response_model=TaskResponse)
 def update_task(task_id: int, task_in: TaskUpdate, db: Session = Depends(get_db)):
     task = db.query(models.Task).filter(models.Task.id == task_id).first()
     if not task:
@@ -118,13 +118,12 @@ def update_task(task_id: int, task_in: TaskUpdate, db: Session = Depends(get_db)
     if task_in.category is not None:
         task.category = task_in.category
     if task_in.due_date is not None:        
-        task.due_date = task_in.due_date     
+        task.due_date = task_in.due_date    
 
     db.commit()
     db.refresh(task)
     return task
 
-# Delete task
 @app.delete("/tasks/{task_id}")
 def delete_task(task_id: int, db: Session = Depends(get_db)):
     task = db.query(models.Task).filter(models.Task.id == task_id).first()
@@ -134,3 +133,10 @@ def delete_task(task_id: int, db: Session = Depends(get_db)):
     db.delete(task)
     db.commit()
     return {"detail": "Task deleted successfully"}
+
+@app.get("/tasks/{task_id}", response_model=TaskResponse)
+def get_task(task_id: int, db: Session = Depends(get_db)):
+    task = db.query(models.Task).filter(models.Task.id == task_id).first()
+    if not task:
+        raise HTTPException(status_code=404, detail="Task not found")
+    return task

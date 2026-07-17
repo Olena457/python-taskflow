@@ -3,24 +3,87 @@ from datetime import datetime, timedelta
 from database import SessionLocal
 import models
 
-# data 
-TITLES = [
-    "Setup frontend project", "Fix navigation bug", "Review pull requests",
-    "Update API documentation", "Buy groceries", "Call the bank",
-    "Schedule dentist appointment", "Read a new tech book", "Go to the gym",
-    "Plan weekend trip", "Pay utility bills", "Clean the workspace",
-    "Order dog food", "Learn Tailwind CSS tricks", "Deploy app to Next.js"
-]
-CATEGORIES = ["Work", "Personal", "Health", "Home", None]
-DESCRIPTIONS = [
-    "Needs to be done ASAP", "Low priority task", "Check notes first",
-    "Ask team for help if needed", None
+TASKS_DATA = [
+    {
+        "title": "Setup frontend project",
+        "category": "Work",
+        "description": "Initialize the Next.js repository, configure Tailwind CSS, set up the folder structure, and add initial configuration files for the linter and formatter."
+    },
+    {
+        "title": "Fix navigation bug",
+        "category": "Work",
+        "description": "Investigate and resolve the issue where the mobile hamburger menu does not close after a user clicks on a link. Ensure animations are smooth and responsive."
+    },
+    {
+        "title": "Review pull requests",
+        "category": "Work",
+        "description": "Go through pending PRs from the junior developers. Check for code quality, adherence to style guidelines, and ensure all tests are passing before merging."
+    },
+    {
+        "title": "Update API documentation",
+        "category": "Work",
+        "description": "Document the newly added endpoints for user authentication and profile management using Swagger. Include detailed request and response examples."
+    },
+    {
+        "title": "Buy groceries",
+        "category": "Home",
+        "description": "Restock the fridge with essential items for the week, including fresh vegetables, fruits, almond milk, whole grain bread, and lean protein sources."
+    },
+    {
+        "title": "Call the bank",
+        "category": "Personal",
+        "description": "Contact customer support to inquire about the recent foreign transaction fees and ask about the process of upgrading the credit card to a premium tier."
+    },
+    {
+        "title": "Schedule dentist appointment",
+        "category": "Health",
+        "description": "Call the dental clinic to book a routine check-up and teeth cleaning session for next week. Request an afternoon slot if possible to avoid morning traffic."
+    },
+    {
+        "title": "Read a new tech book",
+        "category": "Personal",
+        "description": "Spend at least an hour reading the new book on advanced React patterns. Take comprehensive notes on custom hooks and state management strategies."
+    },
+    {
+        "title": "Go to the gym",
+        "category": "Health",
+        "description": "Complete the upper body strength training routine, followed by 20 minutes of high-intensity interval training on the treadmill to improve cardiovascular endurance."
+    },
+    {
+        "title": "Plan weekend trip",
+        "category": "Personal",
+        "description": "Research accommodation options, map out potential hiking trails, check the local weather forecast, and create a packing list for the upcoming mountain getaway."
+    },
+    {
+        "title": "Pay utility bills",
+        "category": "Home",
+        "description": "Log into the online banking portal and settle the electricity, water, and high-speed internet bills before the due date to avoid any late fees or service interruptions."
+    },
+    {
+        "title": "Clean the workspace",
+        "category": "Home",
+        "description": "Organize the desk, wipe down the monitors, throw away old sticky notes, and ensure a clutter-free environment to maintain better focus during working hours."
+    },
+    {
+        "title": "Order dog food",
+        "category": "Home",
+        "description": "Purchase a 15kg bag of premium dry dog food from the online pet store. Check if there are any available discount codes or bulk offers before checking out."
+    },
+    {
+        "title": "Learn Tailwind CSS tricks",
+        "category": "Work",
+        "description": "Watch a comprehensive video tutorial on advanced Tailwind CSS features, focusing primarily on CSS grid layouts, custom animations, and responsive design techniques."
+    },
+    {
+        "title": "Deploy app to Next.js",
+        "category": "Work",
+        "description": "Push the latest approved commits to the main branch, trigger the Vercel deployment pipeline, and carefully verify that the production build is completely stable."
+    }
 ]
 
 def seed_data():
     db = SessionLocal()
     
-    # Check if database is already seeded
     if db.query(models.Task).count() > 0:
         print("Database already contains tasks. Seeding skipped.")
         db.close()
@@ -28,27 +91,25 @@ def seed_data():
         
     print("Seeding database with 15 tasks...")
     
-    for i in range(15):
-        # Generate a random date between 1 and 30 days in the future
+    for task_info in TASKS_DATA:
         future_days = random.randint(1, 30)
         random_date = (datetime.now() + timedelta(days=future_days)).strftime("%Y-%m-%d")
         
-        # 20% chance the task won't have a due date
         due = random_date if random.random() > 0.2 else None
 
         new_task = models.Task(
-            title=TITLES[i],
-            description=random.choice(DESCRIPTIONS),
+            title=task_info["title"],
+            description=task_info["description"],
             done=random.choice([True, False]),
             priority=random.randint(1, 10),
-            category=random.choice(CATEGORIES),
+            category=task_info["category"],
             due_date=due  
         )
         db.add(new_task)
         
     db.commit()
     db.close()
-    print("Database successfully seeded with dates!")
+    print("Database successfully seeded with detailed descriptions and categories!")
 
 if __name__ == "__main__":
     seed_data()

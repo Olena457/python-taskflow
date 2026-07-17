@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Integer, String, Boolean
 from database import Base
 
-# Task database model
 class Task(Base):
     __tablename__ = "tasks"
 
@@ -10,5 +9,5 @@ class Task(Base):
     description = Column(String, nullable=True)  
     done = Column(Boolean, default=False)
     priority = Column(Integer, default=1)  
-    category = Column(String, nullable=True) 
+    category = Column(String, nullable=False)
     due_date = Column(String, nullable=True)
