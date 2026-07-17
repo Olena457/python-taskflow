@@ -11,3 +11,4 @@ class Task(Base):
     done = Column(Boolean, default=False)
     priority = Column(Integer, default=1)  
     category = Column(String, nullable=True) 
+    due_date = Column(String, nullable=True)

@@ -18,6 +18,7 @@ class TaskCreate(BaseModel):
     description: Optional[str] = None
     priority: int = Field(default=1, ge=1, le=10)
     category: Optional[str] = None
+    due_date: Optional[str] = None
 
 class TaskUpdate(BaseModel):
     title: Optional[str] = None
@@ -25,6 +26,7 @@ class TaskUpdate(BaseModel):
     done: Optional[bool] = None
     priority: Optional[int] = Field(None, ge=1, le=10)
     category: Optional[str] = None
+    due_date: Optional[str] = None
 
 class TaskResponse(BaseModel):
     id: int
@@ -33,6 +35,7 @@ class TaskResponse(BaseModel):
     done: bool
     priority: int
     category: Optional[str]
+    due_date: Optional[str] = None
 
     class Config:
         from_attributes = True
@@ -77,7 +80,8 @@ def create_task(task_in: TaskCreate, db: Session = Depends(get_db)):
         title=task_in.title,
         description=task_in.description,
         priority=task_in.priority,
-        category=task_in.category
+        category=task_in.category,
+        due_date=task_in.due_date  
     )
     db.add(new_task)
     db.commit()
@@ -96,7 +100,7 @@ def toggle_task_status(task_id: int, db: Session = Depends(get_db)):
     db.refresh(task)
     return task
 
-# Update task details (title, description, done, priority, category)
+# Update task details
 @app.put("/tasks/{task_id}", response_model=TaskResponse)
 def update_task(task_id: int, task_in: TaskUpdate, db: Session = Depends(get_db)):
     task = db.query(models.Task).filter(models.Task.id == task_id).first()
@@ -113,6 +117,8 @@ def update_task(task_id: int, task_in: TaskUpdate, db: Session = Depends(get_db)
         task.priority = task_in.priority
     if task_in.category is not None:
         task.category = task_in.category
+    if task_in.due_date is not None:        
+        task.due_date = task_in.due_date     
 
     db.commit()
     db.refresh(task)
