@@ -1,3 +1,7 @@
+
+
+
+
 import random
 from datetime import datetime, timedelta
 from database import SessionLocal
@@ -100,7 +104,7 @@ def seed_data():
         new_task = models.Task(
             title=task_info["title"],
             description=task_info["description"],
-            done=random.choice([True, False]),
+            status=random.choice(["todo", "in_progress", "done", "undone"]),
             priority=random.randint(1, 10),
             category=task_info["category"],
             due_date=due  
@@ -109,7 +113,10 @@ def seed_data():
         
     db.commit()
     db.close()
-    print("Database successfully seeded with detailed descriptions and categories!")
+    print("Database successfully seeded with detailed descriptions, categories, and statuses!")
 
 if __name__ == "__main__":
     seed_data()
+
+
+  

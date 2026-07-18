@@ -1,10 +1,9 @@
-import { Task, TaskCreateInput } from "./types/task";
+import { Task, TaskCreateInput, TaskUpdateInput } from "./types/task"; 
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
 
 export async function fetchTasks(query: string = ""): Promise<Task[]> {
   const url = query ? `${API_URL}/tasks?${query}` : `${API_URL}/tasks`;
-
   const res = await fetch(url);
   if (!res.ok) throw new Error("Failed to fetch tasks");
   return res.json();
@@ -20,11 +19,20 @@ export async function createTask(task: TaskCreateInput): Promise<Task> {
   return res.json();
 }
 
-export async function toggleTask(taskId: number): Promise<Task> {
-  const res = await fetch(`${API_URL}/tasks/${taskId}/toggle`, {
+export async function updateTask(
+  taskId: number,
+  taskData: TaskUpdateInput, 
+): Promise<Task> {
+  const res = await fetch(`${API_URL}/tasks/${taskId}`, {
     method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(taskData),
   });
-  if (!res.ok) throw new Error("Failed to toggle task");
+
+  if (!res.ok) {
+    const errorBody = await res.text();
+    throw new Error(`Failed to update task: ${res.status} ${errorBody}`);
+  }
   return res.json();
 }
 
@@ -35,26 +43,69 @@ export async function deleteTask(taskId: number): Promise<void> {
   if (!res.ok) throw new Error("Failed to delete task");
 }
 
-export async function updateTask(
-  taskId: number,
-  taskData: TaskCreateInput,
-): Promise<Task> {
-  const res = await fetch(`${API_URL}/tasks/${taskId}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(taskData),
-  });
-
-  if (!res.ok) {
-    const errorBody = await res.text();
-    console.error("Error updating task:", errorBody);
-    throw new Error(`Failed to update task: ${res.status} ${errorBody}`);
-  }
-  return res.json();
-}
-
 export async function getTaskById(taskId: string | number): Promise<Task> {
   const res = await fetch(`${API_URL}/tasks/${taskId}`);
   if (!res.ok) throw new Error("Failed to fetch task");
   return res.json();
 }
+
+// import { Task, TaskCreateInput } from "./types/task";
+
+// const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+
+// export async function fetchTasks(query: string = ""): Promise<Task[]> {
+//   const url = query ? `${API_URL}/tasks?${query}` : `${API_URL}/tasks`;
+
+//   const res = await fetch(url);
+//   if (!res.ok) throw new Error("Failed to fetch tasks");
+//   return res.json();
+// }
+
+// export async function createTask(task: TaskCreateInput): Promise<Task> {
+//   const res = await fetch(`${API_URL}/tasks`, {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(task),
+//   });
+//   if (!res.ok) throw new Error("Failed to create task");
+//   return res.json();
+// }
+
+// export async function toggleTask(taskId: number): Promise<Task> {
+//   const res = await fetch(`${API_URL}/tasks/${taskId}/toggle`, {
+//     method: "PATCH",
+//   });
+//   if (!res.ok) throw new Error("Failed to toggle task");
+//   return res.json();
+// }
+
+// export async function deleteTask(taskId: number): Promise<void> {
+//   const res = await fetch(`${API_URL}/tasks/${taskId}`, {
+//     method: "DELETE",
+//   });
+//   if (!res.ok) throw new Error("Failed to delete task");
+// }
+
+// export async function updateTask(
+//   taskId: number,
+//   taskData: TaskCreateInput,
+// ): Promise<Task> {
+//   const res = await fetch(`${API_URL}/tasks/${taskId}`, {
+//     method: "PATCH",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(taskData),
+//   });
+
+//   if (!res.ok) {
+//     const errorBody = await res.text();
+//     console.error("Error updating task:", errorBody);
+//     throw new Error(`Failed to update task: ${res.status} ${errorBody}`);
+//   }
+//   return res.json();
+// }
+
+// export async function getTaskById(taskId: string | number): Promise<Task> {
+//   const res = await fetch(`${API_URL}/tasks/${taskId}`);
+//   if (!res.ok) throw new Error("Failed to fetch task");
+//   return res.json();
+// }

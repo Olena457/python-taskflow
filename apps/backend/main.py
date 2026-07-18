@@ -1,12 +1,13 @@
 
 
+
 from fastapi import FastAPI, Depends, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware 
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, Field
 from typing import Optional, List
 
-from database import engine, Base, get_db
+from database import engine, get_db
 import models
 
 # Initialize database
@@ -16,12 +17,15 @@ app = FastAPI(title="TaskFlow API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://192.168.1.3:3000"], 
+    allow_origins=[
+        "http://localhost:3000", 
+        "http://127.0.0.1:3000", 
+        "http://192.168.1.3:3000"
+    ], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"], 
 )
-
 # --- PYDANTIC SCHEMAS ---
 
 class TaskCreate(BaseModel):
@@ -30,11 +34,12 @@ class TaskCreate(BaseModel):
     priority: int = Field(default=1, ge=1, le=10)
     category: Optional[str] = None
     due_date: Optional[str] = None
+    status: Optional[str] = "todo"
 
 class TaskUpdate(BaseModel):
     title: Optional[str] = None
     description: Optional[str] = None
-    done: Optional[bool] = None
+    status: Optional[str] = None
     priority: Optional[int] = Field(None, ge=1, le=10)
     category: Optional[str] = None
     due_date: Optional[str] = None
@@ -43,7 +48,7 @@ class TaskResponse(BaseModel):
     id: int
     title: str
     description: Optional[str]
-    done: bool
+    status: str
     priority: int
     category: Optional[str]
     due_date: Optional[str] = None
@@ -56,7 +61,7 @@ class TaskResponse(BaseModel):
 @app.get("/tasks", response_model=List[TaskResponse])
 def get_tasks(
     search: Optional[str] = None,
-    status: Optional[str] = Query("all", description="all, done, or undone"),
+    status: Optional[str] = Query("all", description="all, undone, in_progress, done"),
     category: Optional[str] = None, 
     sort_priority: Optional[str] = Query(None, description="asc or desc"),
     db: Session = Depends(get_db)
@@ -69,11 +74,8 @@ def get_tasks(
             (models.Task.description.contains(search))
         )
 
-    # Filter by status
-    if status == "done":
-        query = query.filter(models.Task.done == True)
-    elif status == "undone":
-        query = query.filter(models.Task.done == False)
+    if status and status != "all":
+        query = query.filter(models.Task.status == status)
 
     # Filter by category
     if category:
@@ -92,6 +94,7 @@ def create_task(task_in: TaskCreate, db: Session = Depends(get_db)):
     new_task = models.Task(
         title=task_in.title,
         description=task_in.description,
+        status=task_in.status,
         priority=task_in.priority,
         category=task_in.category,
         due_date=task_in.due_date  
@@ -111,8 +114,8 @@ def update_task(task_id: int, task_in: TaskUpdate, db: Session = Depends(get_db)
         task.title = task_in.title
     if task_in.description is not None:
         task.description = task_in.description
-    if task_in.done is not None:
-        task.done = task_in.done
+    if task_in.status is not None:
+        task.status = task_in.status
     if task_in.priority is not None:
         task.priority = task_in.priority
     if task_in.category is not None:

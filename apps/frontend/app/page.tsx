@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import TaskHeader from "../src/components/TaskHeader";
+import TaskHeader from "../src/components/common/TaskHeader";
 
 export default function Home() {
   return (
@@ -19,7 +19,7 @@ export default function Home() {
 
         <Link
           href="/tasks"
-          className="bg-accent text-white font-bold py-3 px-8 rounded-full hover:bg-accent-hover transition-colors inline-block text-lg"
+          className="bg-accent text-black font-bold py-3 px-8 rounded-full hover:bg-accent-hover transition-colors inline-block text-lg"
         >
           Go to My Tasks
         </Link>
