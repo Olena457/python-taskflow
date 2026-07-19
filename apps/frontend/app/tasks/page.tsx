@@ -3,11 +3,11 @@
 
 import { Toaster } from "react-hot-toast";
 import TaskForm from "../../src/components/tasks/TaskForm";
-import { TaskList } from "../../src/components/tasks/TaskList"; // Оновлений компонент списку
+import { TaskList } from "../../src/components/tasks/TaskList";
 import TaskHeader from "../../src/components/common/TaskHeader";
 import SearchInput from "../../src/components/ui/SearchInput";
 import SortFilter from "../../src/components/ui/SortFilter";
-import { useTasks } from "../../src/hooks/useTasks"; // Імпорт нового хука
+import { useTasks } from "../../src/hooks/useTasks";
 
 export default function TasksPage() {
   const { tasks, loading, error, filters, setFilters, addTask, removeTask } =
@@ -40,14 +40,14 @@ export default function TasksPage() {
               />
               <SortFilter
                 status={filters.status}
-                sort={filters.sort_priority}
+                category={filters.category} 
+                sort={filters.sort} 
                 onFilterChange={(newFilters) =>
                   setFilters((prev) => ({ ...prev, ...newFilters }))
                 }
               />
             </div>
 
-            {/* Використовуємо чистий компонент списку */}
             <div className="flex-1 overflow-y-auto pr-2">
               <TaskList
                 tasks={tasks}

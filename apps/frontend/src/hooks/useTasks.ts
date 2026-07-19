@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -9,18 +10,20 @@ export const useTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
   const [filters, setFilters] = useState({
     search: "",
     status: "all",
-    sort_priority: "",
+    category: "",
+    sort: "",
   });
 
   useEffect(() => {
     const loadTasks = async () => {
       setLoading(true);
       try {
-        const query = new URLSearchParams(filters).toString();
-        setTasks(await fetchTasks(query));
+        const fetchedTasks = await fetchTasks(filters);
+        setTasks(fetchedTasks);
       } catch {
         setError("Could not connect to the backend server.");
         toast.error("Failed to load tasks");
