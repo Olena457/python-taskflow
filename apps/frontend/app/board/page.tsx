@@ -59,7 +59,7 @@ if (loading)
   );
   return (
     <main className="min-h-screen bg-background text-primary ">
-      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border px-4 md:px-8 ">
+      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm px-4 md:px-8 ">
         <TaskHeader showBackLink={true} />
       </div>
       <div className="p-4 md:p-8">

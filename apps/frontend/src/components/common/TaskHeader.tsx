@@ -14,7 +14,7 @@ export default function TaskHeader({
   actions,
 }: TaskHeaderProps) {
   return (
-    <header className="flex items-center justify-between bg-red-100 p-4">
+    <header className="flex items-center justify-between p-4">
       <div>
         <h1 className="text-3xl font-extrabold tracking-tight text-primary">
           TaskFlow
@@ -28,7 +28,7 @@ export default function TaskHeader({
         {showBackLink && (
           <Link
             href="/"
-            className="px-4 py-2 text-sm font-medium bg-surface border border-border rounded-lg hover:bg-secondary/10 transition-colors"
+            className="px-4 py-2 text-sm font-medium bg-surface  rounded-lg hover:bg-secondary/10 transition-colors"
           >
             Home
           </Link>
@@ -36,14 +36,14 @@ export default function TaskHeader({
 
         <Link
           href="/tasks"
-          className="px-4 py-2 text-sm font-medium bg-surface border border-border rounded-lg hover:bg-secondary/10 transition-colors"
+          className="px-4 py-2 text-sm font-medium bg-surface  rounded-lg hover:bg-secondary/10 transition-colors"
         >
           Tasks
         </Link>
 
         <Link
           href="/board"
-          className="px-4 py-2 text-sm font-medium bg-surface border border-border rounded-lg hover:bg-secondary/10 transition-colors"
+          className="px-4 py-2 text-sm font-medium bg-surface  rounded-lg hover:bg-secondary/10 transition-colors"
         >
           Board
         </Link>

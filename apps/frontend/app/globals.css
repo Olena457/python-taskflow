@@ -1,35 +1,48 @@
+
+
+
+
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: var(--bg-color);
+  --color-surface: var(--surface-color);
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-accent: var(--accent-color);
+  --color-border: var(--border-color);
+}
 
 @layer base {
   :root {
-    --bg-color: #f9fafb;
+    /* --- light theme --- */
+    --bg-color: #f3f4f6;
     --surface-color: #ffffff;
-    --text-primary: #1f2937;
-    --text-secondary: #6b7280;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --accent-color: #10b981;
     --border-color: #e5e7eb;
-    --accent-color: #2563eb;
-    --accent-hover-color: #1d4ed8;
   }
 
   .dark {
-    --bg-color: #111827;
-    --surface-color: #1f2937;
-    --text-primary: #f9fafb;
-    --text-secondary: #9ca3af;
-    --border-color: #374151;
-    --accent-color: #3b82f6;
-    --accent-hover-color: #60a5fa;
+    --bg-color: #0a0a0a;
+    --surface-color: #1c1c1e;
+    --text-primary: #f8fafc;
+    --text-secondary: #a1a1aa;
+    --accent-color: #facc15;
+    --border-color: #27272a;
   }
 
   body {
     background-color: var(--bg-color);
     color: var(--text-primary);
-    transition:
-      background-color 0.3s ease,
-      color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
-}
-@layer {
+
+
+  @layer components {
   .loader {
     width: 30px;
     aspect-ratio: 1;
@@ -47,21 +60,28 @@
   }
 
   .loader::before {
-    background: radial-gradient(at 30% 30%, #54a5ff, #001980);
+    background: radial-gradient(at 30% 30%, #35ff9e, #065f46);
     transform: scaleY(0.65);
     top: 0;
     animation: l11-1 2s cubic-bezier(0, 400, 1, 400) infinite, l11-2 2s ease infinite;
   }
 
   .loader::after {
-    background: #ccc;
+    background: rgba(0, 0, 0, 0.15);
     filter: blur(8px);
     transform: scaleY(0.3) translate(0px, 0px);
     left: 0;
     animation: l11-3 2s cubic-bezier(0, 400, 1, 400) infinite;
   }
 
+  .dark .loader::after {
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 10px rgba(53, 255, 158, 0.2);
+  }
+
   @keyframes l11-1 { 100% { top: -0.2px } }
   @keyframes l11-2 { 4%, 96% { transform: scaleY(1) } }
   @keyframes l11-3 { 100% { transform: scaleY(0.3) translate(0.1px, -0.1px) } }
+}
+
 }
