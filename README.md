@@ -17,6 +17,8 @@ _A professional, full-stack task management application featuring an interactive
   <img src="/apps/frontend/public/edit.jpg" width="30%" height="150px" alt="Screenshot 6"/>
 
 </div>
+
+
 ---
 
 ## Key Features
@@ -27,7 +29,14 @@ _A professional, full-stack task management application featuring an interactive
 * **Advanced Sorting & Filtering:**
   * **Sort tasks by:** Priority (Asc/Desc), Due Date, Status, Category, and Title.
   * **Filter tasks by:** Status and Category to maintain focus on specific workflows.
-* **Responsive & Accessible UI:** Fully responsive design styled with Tailwind CSS v4, featuring seamless Light/Dark mode toggling (`next-themes`) and sleek toast notifications (`react-hot-toast`).
+* **Interactive API Documentation (Swagger/OpenAPI):** Fully documented RESTful API with interactive UI available out-of-the-box via FastAPI at `/docs` (or `/redoc`).
+* **Responsive & Accessible UI:** Fully responsive design styled with Tailwind CSS, featuring seamless Light/Dark mode toggling (`next-themes`) and sleek toast notifications (`react-hot-toast`).
+
+---
+
+## Testing
+
+The backend includes automated integration and regression tests powered by **Pytest** and FastAPI's `TestClient` to ensure API endpoints operate correctly and handle schema validation edge cases.
 
 ---
 
@@ -61,8 +70,8 @@ Follow these instructions to set up the project locally.
 ### 1. Clone the Repository
 
 ```bash
-git clone [https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git)
-cd YOUR_REPOSITORY_NAME
+git clone [https://github.com/USERNAME/REPOSITORY_NAME.git](https://github.com/USERNAME/REPOSITORY_NAME.git)
+cd REPOSITORY_NAME
 ```
 
 
@@ -107,6 +116,16 @@ npm install
 ```bash
 # Start the development server
 npm run dev
+
+```
+
+### Running Backend Tests
+
+Navigate to the backend directory and run:
+
+```bash
+cd apps/backend
+pytest
 
 ```
 

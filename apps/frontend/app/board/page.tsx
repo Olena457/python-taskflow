@@ -1,61 +1,40 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
-import { DragDropContext, DropResult } from "@hello-pangea/dnd";
+import { DragDropContext } from "@hello-pangea/dnd";
 import TaskHeader from "../../src/components/common/TaskHeader";
 import BoardColumn from "../../src/components/tasks/BoardColumn";
-import { Task } from "../../src/types/task";
-import { fetchTasks, updateTask, deleteTask } from "../../src/api";
-import toast from "react-hot-toast";
-import { Spinner } from "../../src/components/ui/Spinner";
+import { useBoard } from "../../src/hooks/useBoard"; 
+import { BoardSkeleton } from "../../src/components/ui/BoardSkeleton";
 
 export default function BoardPage() {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchTasks()
-      .then(setTasks)
-      .finally(() => setLoading(false));
-  }, []);
-
-  const onDragEnd = async (result: DropResult) => {
-    const { destination, source, draggableId } = result;
-
-    if (!destination || destination.droppableId === source.droppableId) return;
-
-    const taskId = Number(draggableId);
-    const newStatus = destination.droppableId;
-
-    setTasks((prev) =>
-      prev.map((t) => (t.id === taskId ? { ...t, status: newStatus } : t)),
-    );
-
-    try {
-      await updateTask(taskId, { status: newStatus });
-      toast.success("Status updated");
-    } catch {
-      toast.error("Failed to update status");
-      fetchTasks().then(setTasks);
-    }
-  };
-
-  const handleDelete = async (id: number) => {
-    try {
-      await deleteTask(id);
-      setTasks((prev) => prev.filter((t) => t.id !== id));
-      toast.success("Task deleted");
-    } catch {
-      toast.error("Failed to delete");
-    }
-  };
+  const { tasks, loading, error, onDragEnd, handleDelete } = useBoard();
 
   if (loading)
     return (
-      <div className="flex justify-center items-center h-screen">
-        <Spinner />
-      </div>
+      <main className="h-screen bg-background text-primary flex flex-col overflow-hidden">
+        <div className="shrink-0 z-50 bg-background/95 border-b border-border/50">
+          <TaskHeader showBackLink={true} />
+        </div>
+        <div className="flex-1 flex justify-center items-center">
+          <BoardSkeleton />
+        </div>
+      </main>
+    );
+
+  if (error)
+    return (
+      <main className="h-screen bg-background text-primary flex flex-col overflow-hidden">
+        <div className="shrink-0 z-50 bg-background/95 border-b border-border/50">
+          <TaskHeader showBackLink={true} />
+        </div>
+        <div className="flex-1 flex flex-col justify-center items-center p-4 text-center">
+          <div className="text-red-500 font-semibold text-xl mb-2">
+            Oops! Something went wrong.
+          </div>
+          <p className="text-secondary">{error}</p>
+        </div>
+      </main>
     );
 
   return (
