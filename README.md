@@ -8,13 +8,13 @@ _A professional, full-stack task management application featuring an interactive
 <div style="display: flex; flex-wrap: wrap; gap: 15px;">
 
   
-  <img src="./public/task.jpg" width="30%" height="150px" alt="Screenshot 2"/>
-  <img src="./public/screen-2.jpg" width="30%" height="150px" alt="Screenshot 3"/>
-  <img src="./public/screen-4.jpg" width="30%" height="150px" 
+  <img src="/apps/frontend/public/task.jpg" width="30%" height="150px" alt="Screenshot 2"/>
+  <img src="/apps/frontend/public/screen-2.jpg" width="30%" height="150px" alt="Screenshot 3"/>
+  <img src="/apps/frontend/public/screen-4.jpg" width="30%" height="150px" 
   alt="Screenshot 4"/>
-  <img src="./public/welcom.jpg" width="30%" height="150px" alt="Screenshot 1"/>
-  <img src="./public/screen-3.jpg" width="30%" height="150px" alt="Screenshot 5"/>
-  <img src="./public/edit.jpg" width="30%" height="150px" alt="Screenshot 6"/>
+  <img src="/apps/frontend/public/welcom.jpg" width="30%" height="150px" alt="Screenshot 1"/>
+  <img src="/apps/frontend/public/screen-3.jpg" width="30%" height="150px" alt="Screenshot 5"/>
+  <img src="/apps/frontend/public/edit.jpg" width="30%" height="150px" alt="Screenshot 6"/>
 
 </div>
 ---
