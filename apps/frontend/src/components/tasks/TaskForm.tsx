@@ -31,22 +31,25 @@ export default function TaskForm({
   const { state, setters, validateAndFormat, resetForm } =
     useTaskForm(initialData);
 
-const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  const data = validateAndFormat();
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = validateAndFormat();
 
-  if (data) {
-    onSubmit(data);
-    if (!initialData) resetForm();
-  }
-};
+    if (data) {
+      onSubmit(data);
+      if (!initialData) resetForm();
+    }
+  };
 
   const inputClass =
     "w-full px-3 py-2 bg-background border border-border text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-accent transition-colors";
 
+  const baseWrapperClass =
+    "bg-surface p-6 rounded-lg shadow-sm border border-border w-full";
+
   const formWrapperClass = initialData
-    ? "w-full animate__animated animate__fadeIn"
-    : "bg-surface p-6 rounded-lg shadow-sm border border-border mb-8 w-full";
+    ? `${baseWrapperClass} animate__animated animate__fadeIn`
+    : `${baseWrapperClass} mb-8`;
 
   return (
     <form onSubmit={handleSubmit} className={formWrapperClass}>
@@ -60,6 +63,7 @@ const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
           <input
             type="text"
             value={state.title}
+            maxLength={100}
             onChange={(e) => setters.setTitle(e.target.value)}
             required
             className={inputClass}
@@ -75,6 +79,7 @@ const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
           </label>
           <textarea
             value={state.description}
+            maxLength={450}
             onChange={(e) => setters.setDescription(e.target.value)}
             className={`${inputClass} min-h-[100px]`}
             placeholder="Add detailed notes here..."
@@ -133,16 +138,16 @@ const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
             </select>
           </div>
         </div>
+
         {/* Buttons */}
-        {/* Buttons */}
-        <div className="mt-4 flex gap-3">
+        <div className="mt-4 flex gap-2 min-[375px]:gap-3">
           <button
             type="submit"
-            className="flex-1 px-6 py-2.5 flex items-center justify-center gap-2 rounded-[12px] font-semibold shadow-md btn-gradient focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:outline-none active:scale-95"
+            className="flex-1 px-3 py-2 min-[375px]:px-6 min-[375px]:py-2.5 text-sm min-[375px]:text-base flex items-center justify-center gap-1.5 min-[375px]:gap-2 rounded-[12px] font-semibold shadow-md btn-gradient focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:outline-none active:scale-95 transition-transform"
           >
             {initialData ? (
               <>
-                <Save size={18} /> Save Changes
+                <Save size={18} /> Save 
               </>
             ) : (
               <>
@@ -155,7 +160,7 @@ const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
             <button
               type="button"
               onClick={onCancel}
-              className="px-6 py-2.5 bg-background border border-border text-secondary font-bold rounded-[12px] hover:text-red-500 hover:border-red-500 transition-colors flex items-center justify-center gap-2"
+              className="px-3 py-2 min-[375px]:px-6 min-[375px]:py-2.5 text-sm min-[375px]:text-base bg-background border border-border text-secondary font-bold rounded-[12px] hover:text-red-500 hover:border-red-500 transition-colors flex items-center justify-center gap-1.5 min-[375px]:gap-2"
             >
               <X size={18} /> Cancel
             </button>

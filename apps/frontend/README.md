@@ -1,36 +1,150 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TaskFlow - Full-Stack Task Manager
 
-## Getting Started
+_A professional, full-stack task management application featuring an interactive Drag-and-Drop board. Designed as a monorepo, this project features a high-performance FastAPI backend and a responsive Next.js frontend, engineered for seamless task organization and productivity._
 
-First, run the development server:
+## Screenshots
+
+
+<div style="display: flex; flex-wrap: wrap; gap: 15px;">
+
+  
+  <img src="./public/task.jpg" width="30%" height="150px" alt="Screenshot 2"/>
+  <img src="./public/screen-2.jpg" width="30%" height="150px" alt="Screenshot 3"/>
+  <img src="./public/screen-4.jpg" width="30%" height="150px" 
+  alt="Screenshot 4"/>
+  <img src="./public/welcom.jpg" width="30%" height="150px" alt="Screenshot 1"/>
+  <img src="./public/screen-3.jpg" width="30%" height="150px" alt="Screenshot 5"/>
+  <img src="./public/edit.jpg" width="30%" height="150px" alt="Screenshot 6"/>
+
+</div>
+---
+
+## Key Features
+
+* **Interactive Board:** Built with `@hello-pangea/dnd`, allowing users to seamlessly move tasks across intuitive columns: **To Do**, **In Progress**, **Done**, and **Undone**.
+* **Automated State Synchronization:** Dragging and dropping a task into a new column automatically triggers a backend update, rewriting and saving the new status in real-time without requiring page reloads.
+* **Comprehensive Task Management (CRUD):** Easily create, read, update, and delete tasks with detailed inputs (title, description, due date, category, and priority).
+* **Advanced Sorting & Filtering:**
+  * **Sort tasks by:** Priority (Asc/Desc), Due Date, Status, Category, and Title.
+  * **Filter tasks by:** Status and Category to maintain focus on specific workflows.
+* **Responsive & Accessible UI:** Fully responsive design styled with Tailwind CSS v4, featuring seamless Light/Dark mode toggling (`next-themes`) and sleek toast notifications (`react-hot-toast`).
+
+---
+
+## Tech Stack & Architecture
+
+This project follows a **Monorepo Architecture**, housing both the client and server codebases within a single repository to streamline development and deployment.
+
+### Frontend (Client)
+* **Framework:** Next.js (v16.2.10) & React (v19.2.4)
+* **Styling:** Tailwind CSS v4
+* **Drag & Drop:** `@hello-pangea/dnd`
+* **Icons & Components:** Lucide React, React Datepicker
+* **Deployment:** Hosted on **Vercel**
+
+### Backend (Server)
+* **Framework:** FastAPI (High-performance asynchronous Python framework)
+* **ORM & Data Validation:** SQLAlchemy (v2.0) & Pydantic (v2.13)
+* **Server:** Uvicorn
+* **Deployment:** Hosted on **Render**
+
+### Database Strategy
+* **Local Development:** **SQLite** (Auto-generated locally for fast, configuration-free development and testing).
+* **Production:** **PostgreSQL** hosted on **Neon** (Fully managed, scalable cloud database).
+
+---
+
+##  Getting Started
+
+Follow these instructions to set up the project locally. 
+
+### 1. Clone the Repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git)
+cd YOUR_REPOSITORY_NAME
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Navigate to the backend directory
+cd apps/backend
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Create a virtual environment
+python -m venv venv
+```
+```bash
+# Activate the virtual environment
+# On Windows:
+venv\Scripts\activate
+```
+```bash
+# On macOS/Linux:
+source venv/bin/activate
+```
+```bash
+# Install dependencies
+pip install -r requirements.txt
+```
+```bash
+# Seed the local SQLite database with initial mock data
+python seed.py
+```
+```bash
+# Run the development server
+uvicorn main:app --reload
+```
+```bash
+# Navigate to the frontend directory from the project root
+cd apps/frontend
+```
+```bash
+# Install Node dependencies
+npm install
+```
+```bash
+# Start the development server
+npm run dev
 
-## Learn More
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+project-root/
+└── apps/
+    ├── backend/                   # FastAPI Application
+    │   ├── main.py                # Application entry point
+    │   ├── models.py              # SQLAlchemy database models
+    │   ├── schemas.py             # Pydantic data validation schemas
+    │   ├── database.py            # Database connection & engine setup
+    │   ├── tasks.py               # API Routes (CRUD operations)
+    │   ├── seed.py                # Script to populate the DB with initial data
+    │   └── requirements.txt       # Python dependencies
+    │
+    └── frontend/                  # Next.js Application
+        ├── app/                   # Next.js App Router (Pages & Layouts)
+        │   ├── board/             # Interactive board view
+        │   ├── tasks/             # Task details and management routes
+        │   │   └── [id]/          # Dynamic route for specific task details
+        │   ├── globals.css        # Global stylesheet
+        │   ├── layout.tsx         # Root application layout
+        │   └── page.tsx           # Main entry page
+        ├── public/                # Static assets (images, icons, etc.)
+        ├── src/                   # Application logic and UI elements
+        │   ├── components/        # React components
+        │   │   ├── common/        # Shared/reusable components
+        │   │   ├── tasks/         # Task-specific components (Form, Item, etc.)
+        │   │   └── ui/            # General UI elements
+        │   ├── hooks/             # Custom React hooks
+        │   │   ├── useTask.ts     # Hook for single task operations
+        │   │   ├── useTaskForm.ts # Hook for managing form state
+        │   │   └── useTasks.ts    # Hook for fetching and managing task list
+        │   ├── types/             # TypeScript definitions and interfaces
+        │   ├── utils/             # Helper functions
+        │   │   └── task-utils.ts  # Utility logic for tasks
+        │   └── api.ts             # API client and request configuration
+        ├── .env                   # Environment variables
+                                  
+                                 
+ ```

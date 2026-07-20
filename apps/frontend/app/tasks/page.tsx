@@ -25,7 +25,7 @@ export default function TasksPage() {
             <TaskForm onSubmit={addTask} />
           </div>
 
-          <div className="flex flex-col h-[calc(100vh-140px)] space-y-4">
+          <div className="flex flex-col h-[calc(100vh-140px)] space-y-2">
             <div className="space-y-4 flex-shrink-0">
               <SearchInput
                 value={filters.search}

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -30,7 +31,7 @@ export default function ConfirmDeleteDialog({
     <dialog
       ref={dialogRef}
       onClose={onCancel}
-      className="backdrop:bg-black/60 backdrop:backdrop-blur-sm p-6 rounded-2xl shadow-2xl bg-surface border border-border text-primary m-auto min-w-[300px] max-w-md transition-all open:animate-in open:fade-in open:zoom-in-95"
+          className="backdrop:bg-black/70 backdrop:backdrop-blur-sm p-6 rounded-2xl shadow-2xl bg-surface border border-border text-primary m-auto w-[calc(100%-2rem)] max-w-sm transition-all open:animate-in open:fade-in open:zoom-in-95"
     >
       <h3 className="font-bold text-xl mb-3">Delete Task?</h3>
       <hr className="border-border mb-4" />
@@ -40,7 +41,7 @@ export default function ConfirmDeleteDialog({
       <div className="flex justify-end gap-3">
         <button
           onClick={onCancel}
-          className="px-4 py-2 rounded-lg font-semibold text-secondary hover:bg-border/50 transition-colors focus:outline-none"
+          className="px-4 py-2 rounded-lg font-semibold text-secondary border border-transparent hover:border-secondary/40 hover:bg-secondary/10 hover:text-primary transition-all focus:outline-none"
         >
           Cancel
         </button>

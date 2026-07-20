@@ -27,7 +27,7 @@ export const useTask = (id: string) => {
     try {
       await updateTask(Number(id), updatedData);
       toast.success("Task updated!");
-      timerRef.current = setTimeout(() => router.push("/tasks"), 1000);
+      timerRef.current = setTimeout(() => router.push("/board"), 2000);
     } catch {
       toast.error("Failed to update task");
     }

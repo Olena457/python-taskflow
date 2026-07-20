@@ -66,7 +66,7 @@ export default function BoardPage() {
 
       <div className="flex-1 overflow-auto custom-scrollbar p-4 md:p-8">
         <DragDropContext onDragEnd={onDragEnd}>
-          <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-2 pb-12">
+          <div className="grid grid-cols-1 justify-items-center md:justify-items-stretch md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-2 pb-12">
             <BoardColumn
               id="todo"
               title="To Do"

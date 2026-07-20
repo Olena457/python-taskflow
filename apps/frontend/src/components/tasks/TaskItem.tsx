@@ -33,13 +33,12 @@ export default function TaskItem({ task, onDelete }: TaskItemProps) {
           config.borderColor
         } ${config.gradientClass} ${task.status === "done" ? "opacity-75" : ""}`}
       >
-
         <div className="flex flex-col gap-2 mb-2">
           <div className="flex items-center  gap-2">
             <div
               className={`flex items-center gap-1.5 font-bold text-[10px] uppercase tracking-wider ${config.color} shrink-0`}
             >
-              <config.Icon size={14} />
+              <config.Icon size={22} />
               <span>{config.text}</span>
             </div>
 
@@ -71,7 +70,7 @@ export default function TaskItem({ task, onDelete }: TaskItemProps) {
           </div>
         </div>
         <h3
-          className={`font-bold leading-tight mb-2  ${
+          className={`font-bold leading-tight mb-2 cursor-pointer transition-opacity duration-[1500ms] delay-200 ease-out line-clamp-1 max-w-[68%] hover:max-w-full hover:line-clamp-2 opacity-60 hover:opacity-100 ${
             task.status === "done"
               ? "line-through text-secondary"
               : "text-primary"
@@ -84,8 +83,8 @@ export default function TaskItem({ task, onDelete }: TaskItemProps) {
             <div>
               <p
                 className={`text-secondary text-sm transition-all duration-300 ${
-                  isExpanded ? "line-clamp-none" : "line-clamp-2"
-                } max-w-[95%]`}
+                  isExpanded ? "line-clamp-none" : "line-clamp-1"
+                } max-w-[85%]`}
               >
                 {task.description}
               </p>
