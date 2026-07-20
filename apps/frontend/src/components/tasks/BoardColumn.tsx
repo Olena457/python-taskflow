@@ -19,8 +19,8 @@ export default function BoardColumn({
   onDelete,
 }: BoardColumnProps) {
   return (
-    <div className="flex-1 flex flex-col min-w-[250px]">
-      <h3 className="text-md font-bold mb-4 text-secondary uppercase tracking-wider text-center">
+    <div className="flex flex-col h-full w-full">
+      <h3 className="text-md font-bold mb-4 text-secondary uppercase tracking-wider text-center shrink-0">
         {title}
       </h3>
       <Droppable droppableId={id}>
@@ -43,7 +43,9 @@ export default function BoardColumn({
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    className={`mb-4 ${snapshot.isDragging ? "shadow-2xl opacity-80" : ""}`}
+                    className={`mb-4 ${
+                      snapshot.isDragging ? "shadow-2xl opacity-80" : ""
+                    }`}
                   >
                     <TaskItem task={task} onDelete={onDelete} />
                   </div>

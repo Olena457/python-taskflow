@@ -14,23 +14,18 @@ export default function TasksPage() {
     useTasks();
 
   return (
-    <main className="min-h-screen bg-background text-primary transition-colors duration-300 flex flex-col">
+    <main className="min-h-screen bg-background text-primary transition-colors duration-300">
       <Toaster position="bottom-right" />
 
-      <div className="max-w-6xl mx-auto h-screen flex flex-col">
-        <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-border">
-          <div className="max-w-8xl mx-auto">
-            <TaskHeader showBackLink={true} />
-          </div>
-        </div>
+      <TaskHeader showBackLink={true} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8 flex-1 overflow-hidden">
-          {/* Task Form */}
+      <div className="max-w-6xl mx-auto p-4 md:p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-4">
           <div className="space-y-6">
             <TaskForm onSubmit={addTask} />
           </div>
 
-          <div className="flex flex-col h-full overflow-hidden space-y-4">
+          <div className="flex flex-col h-[calc(100vh-140px)] space-y-4">
             <div className="space-y-4 flex-shrink-0">
               <SearchInput
                 value={filters.search}
@@ -40,15 +35,15 @@ export default function TasksPage() {
               />
               <SortFilter
                 status={filters.status}
-                category={filters.category} 
-                sort={filters.sort} 
+                category={filters.category}
+                sort={filters.sort}
                 onFilterChange={(newFilters) =>
                   setFilters((prev) => ({ ...prev, ...newFilters }))
                 }
               />
             </div>
 
-            <div className="flex-1 overflow-y-auto pr-2">
+            <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
               <TaskList
                 tasks={tasks}
                 loading={loading}

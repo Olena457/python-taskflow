@@ -2,7 +2,9 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
+import { ClipboardList } from "lucide-react";
 
 interface TaskHeaderProps {
   showBackLink?: boolean;
@@ -13,43 +15,50 @@ export default function TaskHeader({
   showBackLink = true,
   actions,
 }: TaskHeaderProps) {
+  const pathname = usePathname();
+
+  const getLinkClass = (path: string) => {
+    const isActive = pathname === path;
+
+    return `px-2 min-[475px]:px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+      isActive
+        ? "text-accent bg-accent/10"
+        : "text-secondary hover:text-accent hover:bg-secondary/15"
+    }`;
+  };
+
   return (
-    <header className="flex items-center justify-between p-4">
-      <div>
-        <h1 className="text-3xl font-extrabold tracking-tight text-primary">
+    <header className="sticky top-0 z-50 w-full flex items-center justify-between px-3 min-[475px]:px-6 py-3 bg-background/96 border-b border-border/50 transition-colors">
+      <Link
+        href="/"
+        className="flex items-center hover:opacity-80 transition-opacity"
+      >
+        <ClipboardList className="text-accent min-[475px]:mr-2" size={28} />
+
+        <h1 className="hidden min-[475px]:block text-2xl font-extrabold tracking-tight text-gradient">
           TaskFlow
         </h1>
-        <p className="text-sm text-secondary mt-1">
-          Manage your professional daily tasks efficiently.
-        </p>
-      </div>
+      </Link>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1 min-[475px]:gap-2">
         {showBackLink && (
-          <Link
-            href="/"
-            className="px-4 py-2 text-sm font-medium bg-surface  rounded-lg hover:bg-secondary/10 transition-colors"
-          >
+          <Link href="/" className={getLinkClass("/")}>
             Home
           </Link>
         )}
 
-        <Link
-          href="/tasks"
-          className="px-4 py-2 text-sm font-medium bg-surface  rounded-lg hover:bg-secondary/10 transition-colors"
-        >
+        <Link href="/tasks" className={getLinkClass("/tasks")}>
           Tasks
         </Link>
 
-        <Link
-          href="/board"
-          className="px-4 py-2 text-sm font-medium bg-surface  rounded-lg hover:bg-secondary/10 transition-colors"
-        >
+        <Link href="/board" className={getLinkClass("/board")}>
           Board
         </Link>
 
-        {actions}
-        <ThemeToggle />
+        <div className="ml-1 min-[475px]:ml-2 flex items-center gap-2 min-[475px]:gap-3">
+          {actions}
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );

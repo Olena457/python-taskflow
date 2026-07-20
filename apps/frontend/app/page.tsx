@@ -1,3 +1,5 @@
+
+
 "use client";
 
 import Link from "next/link";
@@ -9,9 +11,10 @@ export default function Home() {
       <TaskHeader showBackLink={false} />
 
       <div className="flex flex-col items-center justify-center mt-20 text-center max-w-xl mx-auto">
-        <h1 className="text-5xl font-extrabold tracking-tight mb-4 text-accent">
+        <h1 className="text-5xl font-extrabold tracking-tight mb-4 text-gradient pb-2">
           Welcome to TaskFlow
         </h1>
+
         <p className="text-lg text-secondary mb-8">
           The ultimate tool to manage your professional and personal daily tasks
           efficiently.
@@ -19,7 +22,7 @@ export default function Home() {
 
         <Link
           href="/tasks"
-          className="bg-accent text-black font-bold py-3 px-8 rounded-full hover:bg-accent-hover transition-colors inline-block text-lg"
+          className="btn-gradient font-bold py-3 px-8 rounded-[16px] inline-block text-lg shadow-md transition-all duration-300"
         >
           Go to My Tasks
         </Link>

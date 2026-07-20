@@ -51,46 +51,48 @@ export default function BoardPage() {
     }
   };
 
-if (loading)
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Spinner />
+      </div>
+    );
+
   return (
-    <div className="flex justify-center items-center h-screen">
-      <Spinner />
-    </div>
-  );
-  return (
-    <main className="min-h-screen bg-background text-primary ">
-      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm px-4 md:px-8 ">
+    <main className="h-screen bg-background text-primary flex flex-col overflow-hidden">
+      <div className="shrink-0 z-50 bg-background/95 border-b border-border/50">
         <TaskHeader showBackLink={true} />
       </div>
-      <div className="p-4 md:p-8">
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div className="flex gap-6 mt-8 h-[calc(100vh-150px)] overflow-x-auto">
-          <BoardColumn
-            id="todo"
-            title="To Do"
-            tasks={tasks.filter((t) => t.status === "todo")}
-            onDelete={handleDelete}
-          />
-          <BoardColumn
-            id="in_progress"
-            title="In Progress"
-            tasks={tasks.filter((t) => t.status === "in_progress")}
-            onDelete={handleDelete}
-          />
-          <BoardColumn
-            id="done"
-            title="Done"
-            tasks={tasks.filter((t) => t.status === "done")}
-            onDelete={handleDelete}
-          />
-          <BoardColumn
-            id="undone"
-            title="Undone"
-            tasks={tasks.filter((t) => t.status === "undone")}
-            onDelete={handleDelete}
-          />
-        </div>
-      </DragDropContext>
+
+      <div className="flex-1 overflow-auto custom-scrollbar p-4 md:p-8">
+        <DragDropContext onDragEnd={onDragEnd}>
+          <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-2 pb-12">
+            <BoardColumn
+              id="todo"
+              title="To Do"
+              tasks={tasks.filter((t) => t.status === "todo")}
+              onDelete={handleDelete}
+            />
+            <BoardColumn
+              id="in_progress"
+              title="In Progress"
+              tasks={tasks.filter((t) => t.status === "in_progress")}
+              onDelete={handleDelete}
+            />
+            <BoardColumn
+              id="done"
+              title="Done"
+              tasks={tasks.filter((t) => t.status === "done")}
+              onDelete={handleDelete}
+            />
+            <BoardColumn
+              id="undone"
+              title="Undone"
+              tasks={tasks.filter((t) => t.status === "undone")}
+              onDelete={handleDelete}
+            />
+          </div>
+        </DragDropContext>
       </div>
     </main>
   );

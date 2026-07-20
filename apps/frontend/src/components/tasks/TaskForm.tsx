@@ -133,12 +133,12 @@ const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
             </select>
           </div>
         </div>
-
+        {/* Buttons */}
         {/* Buttons */}
         <div className="mt-4 flex gap-3">
           <button
             type="submit"
-            className="flex-1 bg-accent text-gray font-bold py-2 px-4 rounded-md hover:bg-accent-hover transition-colors flex items-center justify-center gap-2"
+            className="flex-1 px-6 py-2.5 flex items-center justify-center gap-2 rounded-[12px] font-semibold shadow-md btn-gradient focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:outline-none active:scale-95"
           >
             {initialData ? (
               <>
@@ -155,7 +155,7 @@ const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
             <button
               type="button"
               onClick={onCancel}
-              className="bg-background border border-border text-secondary font-bold py-2 px-4 rounded-md hover:text-red-500 transition-colors flex items-center justify-center gap-2"
+              className="px-6 py-2.5 bg-background border border-border text-secondary font-bold rounded-[12px] hover:text-red-500 hover:border-red-500 transition-colors flex items-center justify-center gap-2"
             >
               <X size={18} /> Cancel
             </button>
