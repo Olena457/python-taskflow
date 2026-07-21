@@ -29,7 +29,7 @@ _A professional, full-stack task management application featuring an interactive
 * **Advanced Sorting & Filtering:**
   * **Sort tasks by:** Priority (Asc/Desc), Due Date, Status, Category, and Title.
   * **Filter tasks by:** Status and Category to maintain focus on specific workflows.
-* **Interactive API Documentation (Swagger/OpenAPI):** Fully documented RESTful API with interactive UI available  via FastAPI at `/docs`.
+* **Interactive API Documentation (Swagger/OpenAPI):** Fully documented RESTful API with interactive UI available  via FastAPI at `/redoc`.
 * **Responsive & Accessible UI:** Fully responsive design styled with Tailwind CSS, featuring seamless Light/Dark mode toggling (`next-themes`) and sleek toast notifications (`react-hot-toast`).
 
 ---
