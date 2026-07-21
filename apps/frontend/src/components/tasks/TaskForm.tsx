@@ -103,6 +103,8 @@ export default function TaskForm({
               wrapperClassName="w-full"
             />
           </div>
+          
+          {/* Priority Field - Fixed */}
           <div>
             <label className="flex items-center gap-2 text-sm font-medium text-secondary mb-1">
               <ArrowUpNarrowWide size={16} />
@@ -112,11 +114,38 @@ export default function TaskForm({
               type="number"
               min="1"
               max="10"
-              value={state.priority}
-              onChange={(e) => setters.setPriority(Number(e.target.value))}
+              required
+              value={state.priority === 0 ? "" : state.priority}
+              onKeyDown={(e) => {
+                if (["-", "+", "e", "E", ".", ","].includes(e.key)) {
+                  e.preventDefault();
+                }
+              }}
+              onChange={(e) => {
+                const val = e.target.value;
+                
+                if (val === "") {
+                  setters.setPriority(0);
+                  return;
+                }
+                
+                const num = parseInt(val, 10);
+                
+                if (!isNaN(num)) {
+                  setters.setPriority(num);
+                }
+              }}
+              onBlur={() => {
+                if (!state.priority || state.priority < 1) {
+                  setters.setPriority(1);
+                } else if (state.priority > 10) {
+                  setters.setPriority(10);
+                }
+              }}
               className={inputClass}
             />
           </div>
+          
           <div>
             <label className="flex items-center gap-2 text-sm font-medium text-secondary mb-1">
               <Tags size={16} />
@@ -147,7 +176,7 @@ export default function TaskForm({
           >
             {initialData ? (
               <>
-                <Save size={18} /> Save 
+                <Save size={18} /> Save
               </>
             ) : (
               <>
