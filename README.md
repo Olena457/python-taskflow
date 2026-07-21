@@ -12,9 +12,9 @@ _A professional, full-stack task management application featuring an interactive
   <img src="/apps/frontend/public/screen-2.jpg" width="30%" height="150px" alt="Screenshot 3"/>
   <img src="/apps/frontend/public/screen-4.jpg" width="30%" height="150px" 
   alt="Screenshot 4"/>
-  <img src="/apps/frontend/public/welcom.jpg" width="30%" height="150px" alt="Screenshot 1"/>
   <img src="/apps/frontend/public/screen-3.jpg" width="30%" height="150px" alt="Screenshot 5"/>
   <img src="/apps/frontend/public/edit.jpg" width="30%" height="150px" alt="Screenshot 6"/>
+  <img src="/apps/frontend/public/welcom.jpg" width="30%" height="150px" alt="Screenshot 1"/>
 
 </div>
 
