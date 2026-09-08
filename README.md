@@ -2,21 +2,28 @@
 
 _A professional, full-stack task management application featuring an interactive Drag-and-Drop board. Designed as a monorepo, this project features a high-performance FastAPI backend and a responsive Next.js frontend, engineered for seamless task organization and productivity._
 
-## Screenshots
 
+
+## Screenshots
 
 <div style="display: flex; flex-wrap: wrap; gap: 15px;">
 
   
-  <img src="/apps/frontend/public/task.jpg" width="30%" height="150px" alt="Screenshot 2"/>
-  <img src="/apps/frontend/public/screen-2.jpg" width="30%" height="150px" alt="Screenshot 3"/>
-  <img src="/apps/frontend/public/screen-4.jpg" width="30%" height="150px" 
-  alt="Screenshot 4"/>
-  <img src="/apps/frontend/public/screen-3.jpg" width="30%" height="150px" alt="Screenshot 5"/>
-  <img src="/apps/frontend/public/edit.jpg" width="30%" height="150px" alt="Screenshot 6"/>
-  <img src="/apps/frontend/public/welcom.jpg" width="30%" height="150px" alt="Screenshot 1"/>
+  <img src="/apps/frontend/public/welcom.jpg" width="30%" height="145px" object-fit: cover; alt="Screenshot 1"/>
+  <img src="/apps/frontend/public/task.jpg" width="30%" height="145px" object-fit: cover; alt="Screenshot 2"/>
+  <img src="/apps/frontend/public/edit.jpg" width="30%" height="145px" object-fit: cover; alt="Screenshot 6"/>
+  <img src="/apps/frontend/public/screen-2.jpg" width="30%" height="145px" object-fit: cover; alt="Screenshot 3"/>
+  <img src="/apps/frontend/public/screen-3.jpg" width="30%" height="145px" object-fit: cover; alt="Screenshot 5"/>
+  <img src="/apps/frontend/public/screen-4.jpg" width="30%" height="145px" object-fit: cover; alt="Screenshot 4"/>
 
 </div>
+
+---
+
+## Demo Video 
+
+You can watch a short demo of application here:  
+[Watch the video](https://drive.google.com/file/d/16or2PQ3EWyz9JzkDdTzgcGWuOwblXFs2/view?usp=sharing)
 
 
 ---
