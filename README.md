@@ -6,15 +6,15 @@ _A professional, full-stack task management application featuring an interactive
 
 ## Screenshots
 
-<div style="display: flex; flex-wrap: wrap; gap: 15px;">
+<div style="display: flex; flex-wrap: wrap; gap: 18px;">
 
   <div style="display: flex; flex-wrap: wrap; gap: 15px;">
-  <img src="/apps/frontend/public/screen-5.jpg" width="30%" height="145px" style="object-fit: cover;" alt="Screenshot 1"/>
-  <img src="/apps/frontend/public/task.jpg" width="30%" height="145px" style="object-fit: cover;" alt="Screenshot 2"/>
-  <img src="/apps/frontend/public/edit.jpg" width="30%" height="145px" style="object-fit: cover;" alt="Screenshot 6"/>
-  <img src="/apps/frontend/public/screen-2.jpg" width="30%" height="145px" style="object-fit: cover;" alt="Screenshot 3"/>
-  <img src="/apps/frontend/public/screen-3.jpg" width="30%" height="145px" style="object-fit: cover;" alt="Screenshot 5"/>
-  <img src="/apps/frontend/public/screen-4.jpg" width="30%" height="145px" style="object-fit: cover;" alt="Screenshot 4"/>
+  <img src="/apps/frontend/public/welcom.jpg" width="30%" height="140px" style="object-fit: cover;" alt="Screenshot 1"/>
+  <img src="/apps/frontend/public/task.jpg" width="30%" height="140px" style="object-fit: cover;" alt="Screenshot 2"/>
+  <img src="/apps/frontend/public/edit.jpg" width="30%" height="140px" style="object-fit: cover;" alt="Screenshot 6"/>
+  <img src="/apps/frontend/public/screen-2.jpg" width="30%" height="140px" style="object-fit: cover;" alt="Screenshot 3"/>
+  <img src="/apps/frontend/public/screen-3.jpg" width="30%" height="140px" style="object-fit: cover;" alt="Screenshot 5"/>
+  <img src="/apps/frontend/public/screen-4.jpg" width="30%" height="140px" style="object-fit: cover;" alt="Screenshot 4"/>
 </div>
 
 </div>
