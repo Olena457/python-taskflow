@@ -9,7 +9,7 @@ _A professional, full-stack task management application featuring an interactive
 <div style="display: flex; flex-wrap: wrap; gap: 15px;">
 
   <div style="display: flex; flex-wrap: wrap; gap: 15px;">
-  <img src="/apps/frontend/public/welcom.jpg" width="30%" height="145px" style="object-fit: cover;" alt="Screenshot 1"/>
+  <img src="/apps/frontend/public/screen-5.jpg" width="30%" height="145px" style="object-fit: cover;" alt="Screenshot 1"/>
   <img src="/apps/frontend/public/task.jpg" width="30%" height="145px" style="object-fit: cover;" alt="Screenshot 2"/>
   <img src="/apps/frontend/public/edit.jpg" width="30%" height="145px" style="object-fit: cover;" alt="Screenshot 6"/>
   <img src="/apps/frontend/public/screen-2.jpg" width="30%" height="145px" style="object-fit: cover;" alt="Screenshot 3"/>
