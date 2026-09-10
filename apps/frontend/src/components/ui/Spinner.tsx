@@ -6,7 +6,7 @@ export const Spinner = () => {
   const [showSlowMessage, setShowSlowMessage] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowSlowMessage(true), 4000);
+    const timer = setTimeout(() => setShowSlowMessage(true), 5000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -15,7 +15,7 @@ export const Spinner = () => {
       <div className="loader" />
 
       {showSlowMessage && (
-        <div className="absolute top-[55%] z-50 flex w-[90%] justify-center animate-in fade-in duration-1000">
+        <div className="absolute top-[60%] z-50 flex w-[90%] justify-center animate-in fade-in duration-1000">
           <AnimatedDatabaseText
             text="WAKING UP SERVER"
             subText="FREE TIER TAKES A LITTLE LONGER..."
