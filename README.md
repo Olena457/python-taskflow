@@ -24,7 +24,7 @@ _A professional, full-stack task management application featuring an interactive
 ## Demo Video 
 
 You can watch a short demo of application here:  
-[Watch the video](https://drive.google.com/file/d/16or2PQ3EWyz9JzkDdTzgcGWuOwblXFs2/view?usp=sharing)
+[Watch the video](https://drive.google.com/file/d/14mU10dz3xermBlF_yWyxt1_TC6fAgY_1/view?usp=sharing)
 
 
 ---
