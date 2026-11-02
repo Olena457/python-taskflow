@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -9,7 +8,7 @@ import PasswordInput from "../src/components/common/PasswordInput";
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     if (typeof window !== "undefined") {
-      return localStorage.getItem("app_authenticated") === "true";
+      return sessionStorage.getItem("app_authenticated") === "true";
     }
     return false;
   });

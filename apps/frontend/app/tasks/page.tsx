@@ -1,6 +1,7 @@
-
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import TaskForm from "../../src/components/tasks/TaskForm";
 import { TaskList } from "../../src/components/tasks/TaskList";
@@ -10,8 +11,24 @@ import SortFilter from "../../src/components/ui/SortFilter";
 import { useTasks } from "../../src/hooks/useTasks";
 
 export default function TasksPage() {
+  const router = useRouter();
+
+  const [isAuthenticated] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      const auth = sessionStorage.getItem("app_authenticated") === "true";
+      if (!auth) {
+        router.replace("/");
+        return false;
+      }
+      return true;
+    }
+    return false;
+  });
+
   const { tasks, loading, error, filters, setFilters, addTask, removeTask } =
     useTasks();
+
+  if (!isAuthenticated) return null;
 
   return (
     <main className="min-h-screen bg-background text-primary transition-colors duration-300">

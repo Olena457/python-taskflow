@@ -10,16 +10,41 @@ export default function PasswordInput({ onSuccess }: PasswordInputProps) {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (password.trim() !== "") {
-      localStorage.setItem("app_password", password);
-      localStorage.setItem("app_authenticated", "true");
-      setError(false);
-      onSuccess();
-    } else {
+
+    if (password.trim() === "") {
       setError(true);
+      return;
+    }
+
+    setLoading(true);
+    setError(false);
+
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+      const res = await fetch(`${apiUrl}/tasks`, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-password": password,
+        },
+      });
+
+      if (res.ok) {
+        sessionStorage.setItem("app_password", password);
+        sessionStorage.setItem("app_authenticated", "true");
+        onSuccess();
+      } else {
+        setError(true);
+        sessionStorage.removeItem("app_password");
+        sessionStorage.removeItem("app_authenticated");
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -82,14 +107,17 @@ export default function PasswordInput({ onSuccess }: PasswordInputProps) {
       </div>
 
       {error && (
-        <p className="text-red-500 text-sm">Please enter a valid password</p>
+        <p className="text-red-500 text-sm">
+          Invalid password. Please try again.
+        </p>
       )}
 
       <button
         type="submit"
-        className="btn-gradient font-bold py-2.5 px-6 rounded-[16px] text-base shadow-md transition-all duration-300 cursor-pointer"
+        disabled={loading}
+        className="btn-gradient font-bold py-2.5 px-6 rounded-[16px] text-base shadow-md transition-all duration-300 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        Unlock TaskFlow
+        {loading ? "Verifying..." : "Unlock TaskFlow"}
       </button>
     </form>
   );
