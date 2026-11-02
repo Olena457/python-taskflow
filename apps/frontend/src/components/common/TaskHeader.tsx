@@ -1,10 +1,12 @@
 
+
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 import { ClipboardList } from "lucide-react";
+import { useState, useEffect } from "react";
 
 interface TaskHeaderProps {
   showBackLink?: boolean;
@@ -16,9 +18,15 @@ export default function TaskHeader({
   actions,
 }: TaskHeaderProps) {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
 
+  useEffect(() => {
+    queueMicrotask(() => {
+      setMounted(true);
+    });
+  }, []);
   const getLinkClass = (path: string) => {
-    const isActive = pathname === path;
+    const isActive = mounted && pathname === path;
 
     return `px-2 min-[475px]:px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
       isActive
