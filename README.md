@@ -32,6 +32,7 @@ You can watch a short demo of application here:
 ## Key Features
 
 * **Interactive Board:** Built with `@hello-pangea/dnd`, allowing users to seamlessly move tasks across intuitive columns: **To Do**, **In Progress**, **Done**, and **Undone**.
+* **Passcode / Owner Access Protection:** Protected application entry with an owner password to prevent unauthorized access.
 * **Automated State Synchronization:** Dragging and dropping a task into a new column automatically triggers a backend update, rewriting and saving the new status in real-time without requiring page reloads.
 * **Comprehensive Task Management (CRUD):** Easily create, read, update, and delete tasks with detailed inputs (title, description, due date, category, and priority).
 * **Advanced Sorting & Filtering:**
