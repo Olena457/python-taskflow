@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
-import { IMAGES } from '../../data/images';
+import { IMAGES, ImageCardType } from "../../data/images";
 
 interface ImageGridModalProps {
   children?: React.ReactNode;
@@ -24,43 +24,48 @@ export default function ImageGridModal({ children }: ImageGridModalProps) {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto mt-10">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-2">
-        <div className="aspect-square bg-card border border-border rounded-2xl p-6 shadow-md flex flex-col justify-center items-center text-center transition-transform hover:-translate-y-1">
-          {children}
-        </div>
-
-        {/* Foto buttons */}
-        {IMAGES.map((img) => (
+    <div className="relative w-full max-w-5xl mx-auto min-h-screen flex items-center justify-center p-4">
+      {/* 3x3 Grid  */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-0 w-full border border-border rounded-3xl overflow-hidden shadow-xl bg-border">
+        {IMAGES.map((img: ImageCardType) => (
           <button
             key={img.id}
             onClick={() => openModal(img.url)}
-            className="aspect-square relative rounded-2xl overflow-hidden border border-border shadow-md transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl group cursor-pointer w-full"
+            className="aspect-square relative overflow-hidden group cursor-pointer w-full bg-card border-b border-r border-border transition-all duration-300"
           >
             <Image
               src={img.url}
               alt={img.alt}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-semibold">
-              Open
+            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-medium text-sm backdrop-blur-[2px]">
+              View
             </div>
           </button>
         ))}
       </div>
 
-      {/* Modal window */}
+      {/* Auth Card z-index */}
+      {children && (
+        <div className="absolute inset-0 z-20 flex items-center justify-center p-4 pointer-events-none">
+          <div className="pointer-events-auto bg-card/95 backdrop-blur-md border border-border rounded-2xl p-6 sm:p-8 shadow-2xl max-w-md w-full flex flex-col justify-center items-center text-center">
+            {children}
+          </div>
+        </div>
+      )}
+
+      {/* Modal Dialog */}
       <dialog
         ref={dialogRef}
         onClick={(e) => e.target === dialogRef.current && closeModal()}
-        className="rounded-2xl p-0 backdrop:bg-black/70 backdrop:backdrop-blur-sm max-w-[90vw] max-h-[90vh] bg-transparent overflow-hidden shadow-2xl border-none outline-none"
+        className="z-50 rounded-2xl p-0 backdrop:bg-transparent max-w-[90vw] max-h-[90vh] bg-transparent overflow-hidden border-none outline-none m-auto fixed inset-0"
       >
-        <div className="relative flex justify-center items-center p-2">
+        <div className="relative flex justify-center items-center">
           <button
             onClick={closeModal}
-            className="absolute top-4 right-4 z-10 p-2 bg-black/60 hover:bg-black/80 text-white rounded-full transition-colors cursor-pointer"
+            className="absolute top-4 right-4 z-50 p-2 bg-black/60 hover:bg-black/80 text-white rounded-full transition-colors cursor-pointer"
             aria-label="Close"
           >
             <X size={24} />
@@ -73,7 +78,7 @@ export default function ImageGridModal({ children }: ImageGridModalProps) {
                 alt="Expanded view"
                 fill
                 sizes="85vw"
-                className="object-contain rounded-2xl"
+                className="object-contain rounded-2xl shadow-2xl"
               />
             </div>
           )}
