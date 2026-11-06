@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useRef } from "react";
@@ -26,8 +25,7 @@ export default function ImageGridModal({ children }: ImageGridModalProps) {
 
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-background m-0 p-0 flex items-center justify-center">
-      {/* Адаптивна сітка на весь екран без відступів по краях */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 w-full h-full gap-0 border-0 bg-border">
+      <div className="grid grid-cols-2 md:grid-cols-5 grid-rows-5 md:grid-rows-2 w-full h-full gap-0 border-0 bg-border">
         {IMAGES.map((img: ImageCardType) => (
           <button
             key={img.id}
@@ -38,7 +36,7 @@ export default function ImageGridModal({ children }: ImageGridModalProps) {
               src={img.url}
               alt={img.alt}
               fill
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              sizes="(max-width: 768px) 50vw, 20vw"
               className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-medium text-sm backdrop-blur-[2px]">
@@ -48,7 +46,6 @@ export default function ImageGridModal({ children }: ImageGridModalProps) {
         ))}
       </div>
 
-      {/* Центральна картка авторизації поверх сітки */}
       {children && (
         <div className="absolute inset-0 z-20 flex items-center justify-center p-4 pointer-events-none">
           <div className="pointer-events-auto bg-card/95 backdrop-blur-md border border-border rounded-2xl p-6 sm:p-8 shadow-2xl max-w-md w-full flex flex-col justify-center items-center text-center">
@@ -57,7 +54,6 @@ export default function ImageGridModal({ children }: ImageGridModalProps) {
         </div>
       )}
 
-      {/* Модальне вікно перегляду фото */}
       <dialog
         ref={dialogRef}
         onClick={(e) => e.target === dialogRef.current && closeModal()}
