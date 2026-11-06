@@ -57,6 +57,7 @@ export default function PasswordInput({ onSuccess }: PasswordInputProps) {
         <input
           type={showPassword ? "text" : "password"}
           placeholder="Enter admin password..."
+          autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="w-full px-4 py-3 pr-12 rounded-[14px] border border-secondary/30 bg-background text-primary focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:focus:ring-yellow-400 shadow-sm transition-all"
