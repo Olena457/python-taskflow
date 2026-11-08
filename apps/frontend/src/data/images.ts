@@ -27,8 +27,8 @@ export const IMAGES: ImageCardType[] = [
   },
   {
     id: 5,
-    url: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&auto=format&fit=crop",
-    alt: "Camera and photography",
+    url: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&auto=format&fit=crop", // Нове фото: робочий простір / ноутбук
+    alt: "Workspace and laptop",
   },
   {
     id: 6,
