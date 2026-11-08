@@ -73,7 +73,7 @@
       background: linear-gradient(to bottom, #eab308, #935610);
     }
 
-    .text-gradient {
+    /* .text-gradient {
       background: linear-gradient(to right, #30e98f, #08815e);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -85,8 +85,20 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+    } */
+   .text-gradient {
+      background: linear-gradient(to right, #059669, #047857, #065f46);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
+    .dark .text-gradient {
+      background: linear-gradient(to right, #fde047, #facc15, #ca8a04);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     .loader {
       width: 30px;
       aspect-ratio: 1;
