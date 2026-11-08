@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef } from "react";
@@ -24,7 +25,8 @@ export default function ImageGridModal({ children }: ImageGridModalProps) {
   };
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-background m-0 p-0 flex items-center justify-center">
+    <div className="fixed inset-0 w-full h-full overflow-hidden bg-background m-0 p-0 flex items-center justify-center">
+      {/*Foto Grid */}
       <div className="grid grid-cols-2 md:grid-cols-5 grid-rows-5 md:grid-rows-2 w-full h-full gap-0 border-0 bg-border">
         {IMAGES.map((img: ImageCardType) => (
           <button
@@ -57,11 +59,17 @@ export default function ImageGridModal({ children }: ImageGridModalProps) {
       <dialog
         ref={dialogRef}
         onClick={(e) => e.target === dialogRef.current && closeModal()}
-        className="z-50 rounded-2xl p-0 backdrop:bg-transparent max-w-[90vw] max-h-[90vh] bg-transparent overflow-hidden border-none outline-none m-auto fixed inset-0"
+        className="z-50 rounded-2xl p-0 backdrop:bg-black/80 max-w-[90vw] max-h-[90vh] bg-transparent overflow-hidden border-none outline-none m-auto fixed inset-0 cursor-pointer"
       >
-        <div className="relative flex justify-center items-center">
+        <div
+          className="relative flex justify-center items-center w-full h-full"
+          onClick={closeModal} 
+        >
           <button
-            onClick={closeModal}
+            onClick={(e) => {
+              e.stopPropagation();
+              closeModal();
+            }}
             className="absolute top-4 right-4 z-50 p-2 bg-black/60 hover:bg-black/80 text-white rounded-full transition-colors cursor-pointer"
             aria-label="Close"
           >
@@ -72,10 +80,11 @@ export default function ImageGridModal({ children }: ImageGridModalProps) {
             <div className="relative w-[85vw] h-[85vh] flex items-center justify-center">
               <Image
                 src={selectedImg}
+                loading="eager"
                 alt="Expanded view"
                 fill
                 sizes="85vw"
-                className="object-contain rounded-2xl shadow-2xl"
+                className="object-contain rounded-2xl shadow-2xl pointer-events-none"
               />
             </div>
           )}

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -15,8 +16,12 @@ export default function Home() {
   });
 
   return (
-    <main className="min-h-screen bg-background p-4 md:p-8 text-primary transition-colors duration-300">
-      {isAuthenticated && <TaskHeader showBackLink={false} />}
+    <main className="fixed inset-0 w-full h-full overflow-hidden bg-background text-primary transition-colors duration-300">
+      {isAuthenticated && (
+        <div className="absolute top-0 left-0 right-0 z-30">
+          <TaskHeader showBackLink={false} />
+        </div>
+      )}
 
       <ImageGridModal>
         <h1 className="text-3xl min-[475px]:text-4xl font-extrabold tracking-tight mb-3 text-gradient pb-1">
