@@ -26,7 +26,6 @@ export default function ImageGridModal({ children }: ImageGridModalProps) {
 
   return (
     <div className="fixed inset-0 w-full h-full overflow-hidden bg-background m-0 p-0 flex items-center justify-center">
-      {/*Foto Grid */}
       <div className="grid grid-cols-2 md:grid-cols-5 grid-rows-5 md:grid-rows-2 w-full h-full gap-0 border-0 bg-border">
         {IMAGES.map((img: ImageCardType) => (
           <button
@@ -39,6 +38,7 @@ export default function ImageGridModal({ children }: ImageGridModalProps) {
               alt={img.alt}
               fill
               sizes="(max-width: 768px) 50vw, 20vw"
+              loading="eager"
               className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-medium text-sm backdrop-blur-[2px]">
@@ -58,18 +58,12 @@ export default function ImageGridModal({ children }: ImageGridModalProps) {
 
       <dialog
         ref={dialogRef}
-        onClick={(e) => e.target === dialogRef.current && closeModal()}
-        className="z-50 rounded-2xl p-0 backdrop:bg-black/80 max-w-[90vw] max-h-[90vh] bg-transparent overflow-hidden border-none outline-none m-auto fixed inset-0 cursor-pointer"
+        onClick={(e) => e.stopPropagation()}
+        className="z-50 rounded-2xl p-0 backdrop:bg-transparent max-w-[90vw] max-h-[90vh] bg-transparent overflow-hidden border-none outline-none m-auto fixed inset-0"
       >
-        <div
-          className="relative flex justify-center items-center w-full h-full"
-          onClick={closeModal} 
-        >
+        <div className="relative flex justify-center items-center">
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              closeModal();
-            }}
+            onClick={closeModal}
             className="absolute top-4 right-4 z-50 p-2 bg-black/60 hover:bg-black/80 text-white rounded-full transition-colors cursor-pointer"
             aria-label="Close"
           >
@@ -77,14 +71,16 @@ export default function ImageGridModal({ children }: ImageGridModalProps) {
           </button>
 
           {selectedImg && (
-            <div className="relative w-[85vw] h-[85vh] flex items-center justify-center">
+            <div
+              onClick={closeModal}
+              className="relative w-[85vw] h-[85vh] flex items-center justify-center cursor-pointer"
+            >
               <Image
                 src={selectedImg}
-                loading="eager"
                 alt="Expanded view"
                 fill
                 sizes="85vw"
-                className="object-contain rounded-2xl shadow-2xl pointer-events-none"
+                className="object-contain rounded-2xl shadow-2xl"
               />
             </div>
           )}
