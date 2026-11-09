@@ -50,7 +50,7 @@ export default function ImageGridModal({ children }: ImageGridModalProps) {
 
       {children && (
         <div className="absolute inset-0 z-20 flex items-center justify-center p-4 pointer-events-none">
-          <div className="pointer-events-auto bg-card/95 backdrop-blur-md border border-border rounded-2xl p-6 sm:p-8 shadow-2xl max-w-md w-full flex flex-col justify-center items-center text-center">
+          <div className="pointer-events-auto bg-card/95 backdrop-blur-md border border-border rounded-2xl p-5 sm:p-9 shadow-2xl w-[95%] max-w-[370px] md:max-w-md flex flex-col justify-center items-center text-center">
             {children}
           </div>
         </div>
