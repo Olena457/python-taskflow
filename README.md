@@ -10,11 +10,14 @@ _A professional, full-stack task management application featuring an interactive
 
  
   <img src="/apps/frontend/public/task.jpg" width="30%" height="130px" style="object-fit: cover;" alt="Screenshot 2"/>
-  <img src="/apps/frontend/public/edit.jpg" width="30%" height="130px" style="object-fit: cover;" alt="Screenshot 6"/>
+  <img src="/apps/frontend/public/screen6.jpg" width="30%" height="130px" style="object-fit: cover;" alt="Screenshot 6"/>
+  <img src="/apps/frontend/public/edit.jpg" width="30%" height="130px" style="object-fit: cover;" alt="Screenshot 9"/>
+  <img src="/apps/frontend/public/screen7.jpg" width="30%" height="130px" style="object-fit: cover;" alt="Screenshot 7"/>
+  <img src="/apps/frontend/public/screen8.jpg" width="30%" height="130px" style="object-fit: cover;" alt="Screenshot 3"/>
   <img src="/apps/frontend/public/screen-2.jpg" width="30%" height="130px" style="object-fit: cover;" alt="Screenshot 3"/>
   <img src="/apps/frontend/public/screen-3.jpg" width="30%" height="130px" style="object-fit: cover;" alt="Screenshot 5"/>
   <img src="/apps/frontend/public/screen-4.jpg" width="30%" height="130px" style="object-fit: cover;" alt="Screenshot 4"/>
-  <img src="/apps/frontend/public/welcom.jpg" width="30%" height="130px" style="object-fit: cover;" alt="Screenshot 1"/>
+  <img src="/apps/frontend/public/screen5.jpg" width="30%" height="130px" style="object-fit: cover;" alt="Screenshot 1"/>
 
 
 </div>

@@ -53,12 +53,18 @@ export default function PasswordInput({ onSuccess }: PasswordInputProps) {
       onSubmit={handleSubmit}
       className="w-full max-w-sm flex flex-col gap-4"
     >
+      <input
+        type="text"
+        name="username"
+        autoComplete="username"
+        defaultValue="admin"
+        style={{ display: "none" }}
+      />
       <div className="relative w-full">
         <input
           type={showPassword ? "text" : "password"}
           placeholder="Enter admin password..."
           autoComplete="current-password"
-          aria-hidden="true"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="w-full px-4 py-3 pr-12 rounded-[14px] border border-secondary/30 bg-background text-primary focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:focus:ring-yellow-400 shadow-sm transition-all"
